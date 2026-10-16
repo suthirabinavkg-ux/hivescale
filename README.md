@@ -19,8 +19,10 @@ All rules live in one file: `src/lib/rules.ts`. The best-practice checklist live
 
 ## Requirements
 
-- Node.js 18.18 or later (tested on Node 22)
-- npm 9 or later
+- Node.js 22 (pinned as `22.x` in `package.json`, which Vercel respects)
+- npm 10 or later (the lockfile was generated with npm 11, which Vercel uses)
+
+Tooling: Vite 8, Vitest 5, TypeScript 5.6, React 18. `npm audit` reports 0 vulnerabilities.
 
 ## Setup and local development
 
@@ -47,6 +49,22 @@ The suite covers the calculation engine (every threshold boundary for both modes
 npm run build     # type-checks, then builds static files into dist/
 npm run preview   # serves dist/ at http://localhost:4173
 ```
+
+## Getting the project onto GitHub
+
+The repository must contain the `src/` and `public/` folders, not just the files at the top level. If Vercel's build fails with `error TS18003: No inputs were found in config file 'tsconfig.app.json'`, the `src/` folder is missing from the repository.
+
+**Using git (most reliable):** unzip the project, open a terminal in the `hivescale` folder, and follow Option A below.
+
+**Using the GitHub website:**
+
+1. Unzip `hivescale.zip` on your computer.
+2. Open the unzipped `hivescale` folder so you can see `src`, `public`, `package.json` and the other files.
+3. On GitHub, go to your repository and choose **Add file → Upload files**.
+4. Select everything inside the `hivescale` folder (the `src` and `public` folders as well as the files) and drag it all onto the upload area. Dragging folders keeps their contents; choosing files through the "choose your files" dialog does not upload folders.
+5. Commit, then confirm on GitHub that you can open `src/App.tsx`.
+
+Don't upload the zip file itself, and don't upload the outer `hivescale` folder as a subfolder, or Vercel won't find `package.json` at the repository root.
 
 ## Deploying to Vercel
 
